@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+   
+  </head>
+  <body>
+    <div class="header">
+      <h1>Rebalance Stock Portfolio</h1>
+    </div>
+    <div style="display:flex">
+      <h2>Portfolio Value: </h2>
+      <h1 style="padding-left: 15px;">  $ {{totalValue}} </h1>
+    </div>
+    <div style="display: flex;">
+      <div style="flex: 50%;">
+        <h3>Current</h3>
+      <table class="table styled-table">
+        <thead>
+          <tr ngclass="btn-primary">
+            <th class="tbl2">Symbol</th>
+            <th class="tbl2">Shares</th>
+            <th class="tbl2">Value</th>
+            <th class="tbl2">Target %</th>
+            <th class="tb12">Current %</th>
+            <th class="tb12">Adjusted Close</th>
+          </tr>
+        </thead>
+        <tr *ngFor="let portfolio of portfolios">
+          <td class="tbl2">{{portfolio.symbol}}</td>
+          <td class="tbl2">{{portfolio.existingShares}}</td>
+          <!-- <td class="tbl2">{{portfolio.numberOfShares}}</td> -->
+          <td class="tbl2">{{portfolio.portfolioValue}}</td>
+          <td class="tbl2">{{portfolio.percentage}}</td>
+          <td class="tbl2">{{portfolio.existingAllocationPercentage}}</td>
+          <td class="tb12">{{portfolio.adjustedClosedPrice}}</td>
+        </tr>
+      </table>
+    </div>
+    <div>
+      <h3>Rebalanced</h3>
+      <table class="table styled-table">
+        <thead>
+          <tr>
+            <th class="tbl2">Symbol</th>
+            <th class="tb12">Total Value</th>
+            <th class="tbl2">+/-</th>
+            <th class="tbl2">Buy</th>
+            <th class="tbl2">Sell</th>
+            <th class="tb12">Desired Shares </th>
+           
+            
+          </tr>
+        </thead>
+        <tr *ngFor="let portfolio of portfolios">
+          <td class="tbl2">{{portfolio.symbol}}</td>
+          <td class="tb12">{{portfolio.desiredStockValue}}</td>
+          <td class="tbl2">{{portfolio.numberOfShares}}</td>
+          <td class="tbl2">{{portfolio.numberOfShareToBuy}}</td>
+          <td class="tbl2">{{portfolio.numberOfShareToSell}}</td>
+          <td class="tbl2">{{portfolio.totalShares}}</td>
+         
+        </tr>
+      </table>
+    </div>
+  </div>
+    <div style = "text-align: -webkit-center;">
+      <h3>Comparison Results</h3>
+      <table class="table styled-table">
+        <thead>
+          <tr>
+            <th class="tbl2">Symbol</th>
+            <th class="tb12">Today Open </th>
+            <th class="tb12">Yesterday closed </th>
+            <th class="tb12">Indicator </th>
+          </tr>
+        </thead>
+        <tr *ngFor="let portfolio of portfolios">
+          <td class="tbl2">{{portfolio.symbol}}</td>
+          <td class="tbl2">{{portfolio.todayOpenPrice}}</td>
+          <td class="tbl2">{{portfolio.yesterdayClosePrice}}</td>
+          <td style="background-color: #81C995" *ngIf="portfolio.todayOpenPrice > portfolio.yesterdayClosePrice"><i
+              class="fas fa-arrow-up"></i>{{portfolio.percentageDifferenceOfOpenandClosedPrice}}</td>
+          <td style="background-color: #F28B82" *ngIf="portfolio.todayOpenPrice < portfolio.yesterdayClosePrice"> <i
+              class="fas fa-arrow-down"></i> {{portfolio.percentageDifferenceOfOpenandClosedPrice}}</td>
+          <td style="background-color: #9AA0A6" *ngIf="portfolio.todayOpenPrice == portfolio.yesterdayClosePrice"> <i
+              class="fas fa-equals"></i>{{portfolio.percentageDifferenceOfOpenandClosedPrice}}</td>
+        </tr>
+      </table>
+    </div>
+    
+<div class="footer">
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+</div>
+  </body>
+</html>
